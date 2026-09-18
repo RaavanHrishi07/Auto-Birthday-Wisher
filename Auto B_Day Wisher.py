@@ -2,8 +2,9 @@
 import pandas as pd
 # datetime module is used for fetching the dates
 import datetime
-import smtplib															# smtp library used for sending mail
+import smtplib							    # smtp library used for sending mail
 import os
+import getpass
 
 current_path = os.getcwd()
 print(current_path)
@@ -13,7 +14,7 @@ os.chdir(current_path)
 # Give your mail here from which you want to send the wishes
 GMAIL_ID = input("Enter your email: ")
 # Give your mail password
-GMAIL_PSWD = input("Enter password for your email mentioned above: ")
+GMAIL_PSWD = getpass.getpass("Enter password for your email mentioned above: ")
 
 
 def sendEmail(to, sub, msg):
@@ -38,7 +39,7 @@ if __name__ == "__main__":
     writeInd = []
     for index, item in df.iterrows():
         bday = item['Birthday']
-        bday = datetime.datetime.strptime(bday, "%dd-%mm-%YY")
+        bday = datetime.datetime.strptime(bday, "%d-%m-%Y")
         bday = bday.strftime("%d-%m")
         if(today == bday) and yearNow not in str(item['LastWishedYear']):
             # calling the sendmail function
